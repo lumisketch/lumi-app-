@@ -109,7 +109,9 @@ button:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-vis
 
 .sidebar-bottom {
   border-top:1px solid var(--border);
-  padding-top:16px;margin-top:15px;
+  padding-top:16px;
+  margin-top:15px;
+  flex-shrink:0;
 }
 .profile {display:flex;align-items:center;gap:10px}
 .avatar {
@@ -406,6 +408,8 @@ body.light .composer-area {background:var(--bg)}
 /* CRÉDITOS DA LUMI */
 
 .credits-card {
+  display: block !important;
+  flex-shrink: 0;
   background: var(--surface);
   border: 1px solid rgba(255,255,255,0.08);
   border-radius: 12px;
