@@ -1,4 +1,4 @@
-const CACHE_NAME = "lumi-cache-v4";
+const CACHE_NAME = "lumi-cache-v5";
 
 const APP_FILES = [
   "./",
