@@ -706,9 +706,10 @@ function getPersonalityKey() {
     throw new Error("O servidor retornou uma resposta inválida.");
   }
 
-  return result.reply;
-}
+    await loadCredits();
 
+  return result.reply;
+  }
   async function sendMessage(text) {
     text = text.trim();
 
