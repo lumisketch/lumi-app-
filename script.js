@@ -11,6 +11,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // O backend deverá receber as mensagens e consultar a Groq.
   const API_URL = "https://lumi-backend-3vid.onrender.com/api/chat";
+  const API_CREDITS_URL = "https://lumi-backend-3vid.onrender.com/api/credits";
 const SUPABASE_URL = "https://iroyxvsbzkqwzebptvos.supabase.co";
 const SUPABASE_ANON_KEY = "sb_publishable_O8TH7RAmEi93qF7-KIG2_Q_nFYjdBO8";
 
@@ -18,7 +19,46 @@ const supabaseClient = window.supabase.createClient(
   SUPABASE_URL,
   SUPABASE_ANON_KEY
 );
+  // CARREGAR CRÉDITOS DA LUMI
+async function loadCredits() {
+  try {
+    const { data, error } = await supabaseClient.auth.getSession();
 
+    if (error || !data.session) return;
+
+    const response = await fetch(API_CREDITS_URL, {
+      method: "GET",
+      headers: {
+        "Authorization": `Bearer ${data.session.access_token}`
+      }
+    });
+
+    if (!response.ok) {
+      throw new Error("Não foi possível carregar os créditos.");
+    }
+
+    const result = await response.json();
+    const credits = result.credits;
+
+    if (!credits) return;
+
+    $("creditsTotal").textContent =
+      Number(credits.total ?? 0);
+
+    $("dailyCredits").textContent =
+      Number(credits.daily_credits ?? 0);
+
+    $("subscriptionCredits").textContent =
+      Number(credits.subscription_credits ?? 0);
+
+    $("purchasedCredits").textContent =
+      Number(credits.purchased_credits ?? 0);
+
+  } catch (error) {
+    console.error("Erro ao carregar créditos:", error);
+  }
+}
+ 
   const defaults = {
     theme: "dark",
     fontSize: 14,
@@ -1105,6 +1145,7 @@ showToast("Não consegui carregar o histórico da nuvem.");
 }
 
 loadAccount();
+loadCredits();
 renderMessages();
 
 $("authOverlay").classList.remove("open");
