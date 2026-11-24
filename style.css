@@ -403,4 +403,37 @@ body.light .composer-area {background:var(--bg)}
   color: var(--accent) !important;
   opacity: 1 !important;
   }
+/* CRÉDITOS DA LUMI */
 
+.credits-card {
+  background: var(--surface);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 12px;
+  padding: 12px;
+  margin-bottom: 14px;
+}
+
+.credits-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 13px;
+  margin-bottom: 10px;
+}
+
+.credits-header strong {
+  font-size: 19px;
+  color: #b9a2ff;
+}
+
+.credits-details {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  font-size: 11px;
+  opacity: 0.8;
+}
+
+.credits-details strong {
+  color: var(--text);
+}
